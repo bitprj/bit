@@ -35,7 +35,7 @@ class Admin(db.Model):
     meta = db.relationship("Meta", back_populates="admin")
 
     def __repr__(self):
-        return f"Admin('{self.email}')"
+        return f"Admin('{self.id}')"
 
 
 class Student(db.Model):
@@ -44,7 +44,7 @@ class Student(db.Model):
     meta = db.relationship("Meta", back_populates="student")
 
     def __repr__(self):
-        return f"Student('{self.email}')"
+        return f"Student('{self.id}')"
 
 
 class Teacher(db.Model):
@@ -53,4 +53,4 @@ class Teacher(db.Model):
     meta = db.relationship("Meta", back_populates="teacher")
 
     def __repr__(self):
-        return f"Teacher('{self.email}')"
+        return f"Teacher('{self.id}')"

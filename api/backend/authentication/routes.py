@@ -1,7 +1,7 @@
 from .. import api, app, db, github
 from ..authentication.utils import create_user
 from ..authentication.decorators import access_token_exists, user_session_exists
-from ..authentication.schemas import MetaSerializer
+from ..authentication.schemas import meta_schema
 from ..models import Meta, Student, User
 from flask import Blueprint, g, redirect, session
 from flask_restful import Resource
@@ -39,7 +39,7 @@ def authorized(access_token):
         db.session.add(oauth_user)
         db.session.commit()
 
-    session["profile"] = MetaSerializer(meta).data
+    session["profile"] = meta_schema.dump(meta)
     g.user = oauth_user
 
     # return session["profile"]

@@ -1,4 +1,4 @@
-from .exceptions import UserSessionVerification
+from ..backend.exceptions import UserSessionVerification
 from flask import session
 
 

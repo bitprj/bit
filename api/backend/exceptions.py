@@ -1,4 +1,4 @@
-from .. import app
+from ..backend import app
 from flask import jsonify
 
 
