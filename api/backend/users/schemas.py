@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields
+import toastedmarshmallow
 
 
 # This schema is used to display user data
@@ -11,5 +12,9 @@ class UserSchema(Schema):
 
     class Meta:
         # Fields to show when sending data
-        fields = ("id", "name", "email", "roles", "location", "image")
+        fields = ("id", "name", "email", "roles", "image")
         ordered = True
+
+
+user_schema = UserSchema()
+user_schema.jit = toastedmarshmallow.Jit
