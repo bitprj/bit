@@ -10,7 +10,7 @@ from flask_restful import Resource
 authentication_bp = Blueprint("authentication", __name__)
 
 
-@authentication_bp.route("/github-callback")
+@authentication_bp.route("/api/github-callback")
 @access_token_exists
 @github.authorized_handler
 def authorized(access_token):
@@ -90,5 +90,5 @@ def token_getter():
 
 
 # Creates the routes for the classes
-api.add_resource(UserOAuthLoginHandler, "/login")
-api.add_resource(UserOAuthLogoutHandler, "/logout")
+api.add_resource(UserOAuthLoginHandler, "/api/login")
+api.add_resource(UserOAuthLogoutHandler, "/api/logout")

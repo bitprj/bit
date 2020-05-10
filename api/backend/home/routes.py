@@ -11,4 +11,4 @@ class Home(Resource):
         return {"ping": "pong"}
 
 
-api.add_resource(Home, "/ping")
+api.add_resource(Home, "/api/ping")
