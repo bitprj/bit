@@ -1,18 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { login, logout } from '../../services/AccountService'
+import { login, logout, fetchMetaData } from '../../services/AccountService'
 import { deauthenticate } from '../../redux/actions/account'
 
-import ProfPic from '../shared/low/ProfPic'
 import Button from '../shared/low/Button'
 import Icon from '../shared/low/Icon'
 import IconLine from '../shared/low/IconLine'
 
 import GitHubIcon from '@material-ui/icons/GitHub'
-import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined'
 
 const contentHeight = '2.2em'
 
@@ -36,50 +34,18 @@ const AlignRight = styled.div`
 	justify-content: flex-end;
 `
 
-const SearchBarContainer = styled.div`
-	position: relative;
-	background-color: #f1f1f1;
-	border-radius: ${contentHeight};
-	display: flex;
-	width: 100%;
-`
-
-const SearchBar = styled.input`
-	width: 100%;
-	line-height: ${contentHeight};
-	border: none;
-	background: none;
-	outline: none;
-	padding-left: 1.25em;
-	padding-right: ${contentHeight};
-	cursor: text;
-`
-
-const SearchIconWrapper = styled.div`
-	position: absolute;
-	width: ${contentHeight};
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	right: 0;
-	cursor: pointer;
-`
-
-const VerticalAlign = styled.div`
-	display: flex;
-	align-items: center;
-`
-
 const NavButton = styled(Button)`
+	color: black;
 	margin: 0 0.5em;
 	padding: 0.4em 1em;
 	font-size: 80%;
 `
 
-const styledLink = { color: 'black', textDecoration: 'none' }
-
-const NavBar = ({ meta, name, image }) => {
+const NavBar = () => {
+	// This is what you would use to call the API
+	// useEffect(() => {
+	// 	const meta = fetchMetaData()
+	// }, [])
 	return (
 		<>
 			<Nav id="nav-bar">
@@ -94,86 +60,14 @@ const NavBar = ({ meta, name, image }) => {
 					</Link>
 				</NavElement>
 
-				{meta?.studentId && (
-					<>
-						<NavElement>
-							<Link style={styledLink} to="/explore/">
-								Explore
-							</Link>
-						</NavElement>
-						<NavElement>
-							<Link style={styledLink} to="./">
-								Community
-							</Link>
-						</NavElement>
-
-						<NavElement style={{ flex: '1' }}>
-							<SearchBarContainer>
-								<SearchBar />
-								<SearchIconWrapper>
-									<SearchIcon />
-								</SearchIconWrapper>
-							</SearchBarContainer>
-						</NavElement>
-
-						<NavElement>
-							<VerticalAlign>
-								<NotificationsOutlinedIcon />
-							</VerticalAlign>
-						</NavElement>
-					</>
-				)}
-
-				{meta?.teacherId && (
-					<NavElement>
-						<Link style={styledLink} to="/grade/">
-							Grading
-						</Link>
-					</NavElement>
-				)}
-
-				{meta?.studentId || meta?.teacherId ? (
-					<AlignRight isStudent={meta?.studentId}>
-						<NavElement
-							onClick={() => {
-								logout().then(_ => deauthenticate())
-							}}
-						>
-							<div style={{ cursor: 'pointer' }}>
-								<ProfPic
-									src={image}
-									name={name?.replace(/ .*/, '')}
-									size="2em"
-								/>
-							</div>
-						</NavElement>
-					</AlignRight>
-				) : null}
-
-				{!meta?.studentId && !meta?.teacherId ? (
-					<AlignRight>
-						<NavButton invert onClick={login}>
-							<IconLine icon={<GitHubIcon />}>Login With GitHub</IconLine>
-						</NavButton>
-					</AlignRight>
-				) : null}
+				<AlignRight>
+					<NavButton invert onClick={login}>
+						<IconLine icon={<GitHubIcon />}>Login With GitHub</IconLine>
+					</NavButton>
+				</AlignRight>
 			</Nav>
 		</>
 	)
 }
 
-const mapStateToProps = state => {
-	const {
-		account: { meta, user }
-	} = state
-
-	const { name, image } = user ?? {}
-
-	return {
-		meta,
-		name,
-		image
-	}
-}
-
-export default connect(mapStateToProps)(NavBar)
+export default NavBar
