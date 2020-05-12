@@ -20,13 +20,16 @@ Bryan
 Practice taking notes on Github during the 1:1
 * Please give your overview feedback and express what position you are within the Engineering team!
 * Give onboarding feedback
+* 
 
 ## Action Plan:
 *Where to go next, dependencies, all deadlines*
-* 
+*Bryan will talk to the People team to improve the onboarding process and have them delve more into what BitProject actually represents as an organization.
+*Watch the remaining webinars and close this issue.  
 
 ## Deliverables:
 *Within the next (timeframe)*
+*Anurag will watch the webinars by Thursday and finish the onboarding checklist.
 
 Name  | Assigned To | Deadline | Notes
 ------|-------------|----------|------
