@@ -1,11 +1,12 @@
 from marshmallow import Schema, fields
 
-
+# Validates tag form
 class TagFormSchema(Schema):
     name = fields.Str(required=True)
     summary = fields.Str(required=True)
     submission_guidelines = fields.Str(required=True)
     about = fields.Str(required=True)
+    emoji = fields.Str(required=True)
 
     class Meta:
         # Fields to show when sending data
