@@ -54,3 +54,16 @@ class Teacher(db.Model):
 
     def __repr__(self):
         return f"Teacher('{self.id}')"
+
+
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text, nullable=False)
+    summary = db.Column(db.Text, nullable=False)
+    submission_guideline = db.Column(db.Text, nullable=False)
+    about = db.Column(db.Text, nullable=False)
+    emoji = db.Column(db.Text, nullable=False)
+    users = db. relationship("User", back_populates="tag")
+
+    def __repr__(self):
+        return f"Tag('{self.id} , {self.name}')"
