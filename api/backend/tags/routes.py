@@ -23,7 +23,7 @@ class TagCRUD(Resource):
     
     # Fetch specific tag - GET
     def get(self, tag_id):
-        tag = Tag.query.get(tag_id)     
+        tag = Tag.query.get(tag_id)     # Query by primary key
 
         return tag_schema.dump(tag)     # Return serialization with TagSchema
 
@@ -47,14 +47,12 @@ class TagCRUD(Resource):
 
 # Class to fetch and create tag
 class Tag(Resource):
-    # Fetch Tags - GET
-    def get(self):
-       
 
     # Create Tag
     def post(self):
-        data = request.get_json()
-        tag = create_tag(data)
+        form_data = request.get_json()
+        validated_form_data = tag_form_schema.dump(form_data)
+        tag = create_tag(validated_form_data)
 
         db.session.add(tag)
         db.session.commit()
@@ -62,6 +60,9 @@ class Tag(Resource):
         return {
             "message": "Tag sucessfully created"
         }, 201
+
+    # Fetch Tags - GET
+    def get(self):
 
 
 # Class to update followers
