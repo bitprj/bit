@@ -10,7 +10,7 @@ class TagFormSchema(Schema):
 
     class Meta:
         # Fields to show when sending data
-        fields = ("name", "summary", "submission_guidelines", "about")
+        fields = ("name", "summary", "submission_guidelines", "about", "emoji")
         ordered = True
 
 
