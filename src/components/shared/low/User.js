@@ -18,9 +18,10 @@ const Container = styled.div`
 const Picture = styled.img`
 	height: 4em;
 	width: 4em;
-	margin-right: 2em;src/components/shared/low/User.js
+	margin-right: 2em;
+	src/components/shared/low/User.js;
 	border-radius: 50%;
-`
+`;
 
 const UserName = styled.h1`
 	padding-top: 0;
