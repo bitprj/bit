@@ -1,4 +1,5 @@
 from api.backend import db
+import datetime
 
 
 class Meta(db.Model):
@@ -54,3 +55,15 @@ class Teacher(db.Model):
 
     def __repr__(self):
         return f"Teacher('{self.id}')"
+
+class Article(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text, nullable=False)
+    cover_image = db.Column(db.Text, nullable=True)
+    content = db.Column(db.Text, nullable=False)
+    date_published = db.Column(db.DateTime, nullable=False, default=datetime.date.today)
+    likes = db.Column(db.Integer, nullable=False, default=0)
+    is_published = db.Column(db.Boolean, nullable=False, default=True)
+
+    def __repr__(self):
+        return f"Article('{self.id}')"
