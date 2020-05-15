@@ -72,7 +72,6 @@ class Tag(Resource):
 # Class to update followers 
 class TagFollowers(Resource):
     def put(self, tag_id):
-        # Add current user from User session to Tag's user's column
         user_data = session["profile"]
         user = User.query.get(user_data["user_id"])
         tag = Tag.query.get(tag_id)
