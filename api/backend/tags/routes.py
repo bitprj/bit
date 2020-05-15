@@ -10,20 +10,17 @@ from ..tags.utils import create_tag, update_tag
 # Blueprint for tags
 tag_bp = Blueprint("tags", __name__)
 
-# FollowTag - /api/tags/<int:tag_id>/followers PUT
-###################################################
 
 # Class for updating, deleting & fetching tags
 class TagCRUD(Resource):
     
-    # Fetch specific tag - GET
+    # Fetch specific tag 
     def get(self, tag_id):
-        tag = Tag.query.get(tag_id)     # Query by primary key
+        tag = Tag.query.get(tag_id)
 
-        return tag_schema.dump(tag)     # Return serialization with TagSchema
+        return tag_schema.dump(tag)    
 
-
-    # Delete specific tag - DEL
+    # Delete specific tag 
     def delete(self, tag_id):
         tag = Tag.query.get(tag_id)
         db.session.delete(tag)
@@ -34,7 +31,7 @@ class TagCRUD(Resource):
         }, 200
 
 
-    # Update specific tag - PUT    
+    # Update specific tag  
     def put(self, tag_id):
         tag = Tag.query.get(tag_id)
         form_data = request.get_json()
@@ -51,7 +48,7 @@ class TagCRUD(Resource):
 # Class to fetch and create tag
 class Tag(Resource):
 
-    # Create Tag - POST
+    # Create Tag 
     def post(self):
         form_data = request.get_json()
         validated_form_data = tag_form_schema.dump(form_data)
@@ -65,18 +62,27 @@ class Tag(Resource):
         }, 201
 
 
-    # Fetch Tags- GET
+    # Fetch Tags
     def get(self):
         tag = Tag.query.limit(15).all()
 
-        return tags_schema.dump(tag)     # Return serialization with TagsSchema
+        return tags_schema.dump(tag)
 
 
-# Class to update followers - PUT
+# Class to update followers 
 class TagFollowers(Resource):
-    def put(self):
+    def put(self, tag_id):
         # Add current user from User session to Tag's user's column
+        user_data = session["profile"]
+        user = User.query.get(user_data["user_id"])
+        tag = Tag.query.get(tag_id)
+        
+        tag.users.append(user)
+        db.session.commit()
 
+        return {
+            "message": user.name + "is now following" + tag.name
+        }, 200
 
 
 # Creates the routes for the classes
