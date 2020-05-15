@@ -1,19 +1,14 @@
 from .. import api
-from flask import Blueprint
+from flask import Blueprint, request, session
 from flask_restful import Resource
-from ..models import Tag
+from ..models import Tag, User
 from ..tags.decorators import tag_exists
-from ..tags.schemas import tag_schema, tag_form_schema
+from ..tags.schemas import tag_schema, tags_schema, tag_form_schema
+from ..tags.utils import create_tag, update_tag
+
 
 # Blueprint for tags
 tag_bp = Blueprint("tags", __name__)
-
-# UpdateTag - /api/tags/<int:tag_id> PUT
-# DeleteTag - /api/tags/<int:tag_id> DEL
-# FetchTag - /api/tags/<int:tag_id> GET
-
-# CreateTag - /api/tags POST
-# FetchTags - /api/tags GET
 
 # FollowTag - /api/tags/<int:tag_id>/followers PUT
 ###################################################
@@ -42,13 +37,21 @@ class TagCRUD(Resource):
     # Update specific tag - PUT    
     def put(self, tag_id):
         tag = Tag.query.get(tag_id)
+        form_data = request.get_json()
+        validate_form_data = tag_form_schema.dump(form_data) 
+        update_tag(tag, form_data)
 
+        db.session.commit()
+
+        return {
+            "message": "Tag successfully updated"
+        }, 200
 
 
 # Class to fetch and create tag
 class Tag(Resource):
 
-    # Create Tag
+    # Create Tag - POST
     def post(self):
         form_data = request.get_json()
         validated_form_data = tag_form_schema.dump(form_data)
@@ -61,12 +64,18 @@ class Tag(Resource):
             "message": "Tag sucessfully created"
         }, 201
 
-    # Fetch Tags - GET
+
+    # Fetch Tags- GET
     def get(self):
+        tag = Tag.query.limit(15).all()
+
+        return tags_schema.dump(tag)     # Return serialization with TagsSchema
 
 
-# Class to update followers
+# Class to update followers - PUT
 class TagFollowers(Resource):
+    def put(self):
+        # Add current user from User session to Tag's user's column
 
 
 
