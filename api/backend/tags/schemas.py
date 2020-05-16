@@ -18,11 +18,6 @@ class TagFormSchema(Schema):
 class TagSchema(Schema):
     id = fields.Int(required=True)
 
-    # class Meta:
-    #     # Fields to show when sending data
-    #     fields = ("id")
-    #     ordered = True
-
 
 tag_form_schema = TagFormSchema()
 tag_schema = TagSchema()
