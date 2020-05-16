@@ -18,7 +18,7 @@ def create_tag(form_data):
 def update_tag(tag, form_data):
   tag.name = form_data["name"]
   tag.summary = form_data["name"]
-  tag.submission_guidelines = form_data["submission_guidelines"]
+  tag.submission_guideline = form_data["submission_guideline"]
   tag.about = form_data["about"]
   tag.emoji = form_data["emoji"]
 
