@@ -12,14 +12,15 @@ tag_bp = Blueprint("tags", __name__)
 
 # Class to fetch and create tag
 class Tags(Resource):
-    @validate_tag_form
     # Create Tag 
+    @validate_tag_form
     def post(self):
         form_data = request.get_json()
         tag = create_tag(form_data)
 
         db.session.add(tag)
         db.session.commit()
+        print(tag)
 
         return {
             "message": "Tag sucessfully created"
@@ -81,7 +82,7 @@ class TagFollowers(Resource):
         user_data = session["profile"]
         user = User.query.get(user_data["user_id"])
         tag = Tag.query.get(tag_id)
-        
+  
         tag.users.append(user)
         db.session.commit()
 
