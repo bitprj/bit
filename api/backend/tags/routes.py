@@ -1,10 +1,10 @@
 from .. import api, db
-from flask import Blueprint, request, session
-from flask_restful import Resource
 from ..models import Tag, User
 from ..tags.decorators import tag_exists, validate_tag_form
 from ..tags.schemas import tag_schema, tags_schema, tag_form_schema
 from ..tags.utils import create_tag, update_tag
+from flask import Blueprint, request, session
+from flask_restful import Resource
 
 # Blueprint for tags
 tag_bp = Blueprint("tags", __name__)
@@ -20,7 +20,6 @@ class Tags(Resource):
 
         db.session.add(tag)
         db.session.commit()
-        print(tag)
 
         return {
             "message": "Tag sucessfully created"
@@ -47,7 +46,6 @@ class TagCRUD(Resource):
     def put(self, tag_id):
         tag = Tag.query.get(tag_id)
         form_data = request.get_json()
-        validate_form_data = tag_form_schema.dump(form_data) 
         update_tag(tag, form_data)
 
         db.session.commit()

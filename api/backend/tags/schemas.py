@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields
+import toastedmarshmallow
 
 
 # Validates tag form
@@ -22,3 +23,6 @@ class TagSchema(Schema):
 tag_form_schema = TagFormSchema()
 tag_schema = TagSchema()
 tags_schema = TagSchema(many=True)
+tag_form_schema.jit = toastedmarshmallow.Jit
+tag_schema.jit = toastedmarshmallow.Jit
+tags_schema.jit = toastedmarshmallow.Jit

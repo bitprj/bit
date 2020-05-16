@@ -32,7 +32,7 @@ def validate_tag_form(f):
         if errors:
             return {
                 "message": "Unable to create tag. Please enter all required form inputs."
-            }, 404
+            }, 422
         else: 
             return f(*args, **kwargs)
 
