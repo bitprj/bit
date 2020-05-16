@@ -31,7 +31,7 @@ class User(db.Model):
     meta_id = db.Column(db.Integer, db.ForeignKey('meta.id'))
     meta = db.relationship("Meta", back_populates="user")
     tags = db.relationship("Tag", secondary="user_tag_rel",               
-                            back_populates="user")
+                            back_populates="users")
    
     def __repr__(self):
         return f"User('{self.email}')"
@@ -72,8 +72,7 @@ class Tag(db.Model):
     about = db.Column(db.Text, nullable=False)
     emoji = db.Column(db.Text, nullable=False)
     users = db.relationship("User", secondary="user_tag_rel",               
-                            back_populates="tag")
+                            back_populates="tags")
 
     def __repr__(self):
         return f"Tag('{self.id} , {self.name}')"
-    

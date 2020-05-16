@@ -43,7 +43,7 @@ class Tags(Resource):
 class TagCRUD(Resource):
 
     # Update specific tag  
-    @validate_form_data
+    @validate_tag_form
     @tag_exists
     def put(self, tag_id):
         tag = Tag.query.get(tag_id)
