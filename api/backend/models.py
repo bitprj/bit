@@ -1,6 +1,6 @@
 from api.backend import db
 
-# Relationships 
+# A many to many relationship to keep track of tags and users
 user_tag_rel = db.Table("user_tag_rel",
                     db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
                     db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True)
