@@ -73,7 +73,7 @@ class Tag(db.Model):
     submission_guideline = db.Column(db.Text, nullable=False)
     about = db.Column(db.Text, nullable=False)
     emoji = db.Column(db.Text, nullable=False)
-    users = db.relationship("Users", secondary="user_tag_rel",               
+    users = db.relationship("User", secondary="user_tag_rel",               
                             back_populates="tags")
 
     def __repr__(self):
