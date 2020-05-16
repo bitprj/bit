@@ -27,8 +27,10 @@ from ..backend.authentication.routes import authentication_bp
 from ..backend.home.routes import home_bp
 from ..backend.meta.routes import meta_bp
 from ..backend.users.routes import user_bp
+from ..backend.articles.routes import articles_bp
 
 app.register_blueprint(authentication_bp)
 app.register_blueprint(home_bp)
 app.register_blueprint(meta_bp)
 app.register_blueprint(user_bp)
+app.register_blueprint(articles_bp)
