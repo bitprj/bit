@@ -1,5 +1,10 @@
 from api.backend import db
 
+# Relationships 
+user_tag_rel = db.Table("user_tag_rel",
+                    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+                    db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True)
+                )
 
 class Meta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -8,6 +13,7 @@ class Meta(db.Model):
     admin = db.relationship("Admin", uselist=False, cascade="all,delete", back_populates="meta")
     student = db.relationship("Student", uselist=False, cascade="all,delete", back_populates="meta")
     teacher = db.relationship("Teacher", uselist=False, cascade="all,delete", back_populates="meta")
+
 
     def __repr__(self):
         return f"Meta('{self.id}')"
@@ -24,7 +30,9 @@ class User(db.Model):
     image = db.Column(db.Text, nullable=True)
     meta_id = db.Column(db.Integer, db.ForeignKey('meta.id'))
     meta = db.relationship("Meta", back_populates="user")
-
+    tags = db.relationship("Tag", secondary="user_tag_rel",               
+                            backref="user")
+   
     def __repr__(self):
         return f"User('{self.email}')"
 
@@ -57,13 +65,15 @@ class Teacher(db.Model):
 
 
 class Tag(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.Text, nullable=False)
     summary = db.Column(db.Text, nullable=False)
     submission_guideline = db.Column(db.Text, nullable=False)
     about = db.Column(db.Text, nullable=False)
     emoji = db.Column(db.Text, nullable=False)
-    users = db. relationship("User", back_populates="tag")
+    users = db.relationship("User", secondary="user_tag_rel",               
+                            backref="tag")
 
     def __repr__(self):
         return f"Tag('{self.id} , {self.name}')"
+    
