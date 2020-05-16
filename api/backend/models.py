@@ -7,6 +7,7 @@ user_tag_rel = db.Table("user_tag_rel",
                     db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True)
                 )
 
+
 class Meta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     roles = db.Column(db.Text, nullable=True)
@@ -72,7 +73,7 @@ class Tag(db.Model):
     submission_guideline = db.Column(db.Text, nullable=False)
     about = db.Column(db.Text, nullable=False)
     emoji = db.Column(db.Text, nullable=False)
-    user = db.relationship("Users", secondary="user_tag_rel",               
+    users = db.relationship("Users", secondary="user_tag_rel",               
                             back_populates="tags")
 
     def __repr__(self):
