@@ -7,10 +7,8 @@ const TabButton = styled.button`
     font-weight: bold;
     font-size: 1.25em;
     line-height: 1.56em;
-    display: inline-block;
-    position: relative;
     padding: 0.25em 1.5em;
-    margin: 1em auto;
+    margin: 0.5em auto;
     outline: none;
     border: none;
     border-radius: 2em;
@@ -31,8 +29,11 @@ const TabButton = styled.button`
     }}
 `
 const Tab = props =>(
-    <TabButton 
+    <TabButton
+        className={props.className} 
         active = {props.active}
+        onClick = {props.onClick}
+        {...props}
     >
         {props.children}
     </TabButton>

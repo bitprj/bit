@@ -13,20 +13,24 @@ const TabContainer = styled.div`
 `
 
 const ToggleTab = props => (
-    <TabGroup>  
-        {
-            props.tabs.map((tab,i) => (
-                <TabContainer vertical={props.vertical}>
-                    <Tab 
-                        onClick={props.onClick} 
-                        active={i === props.activeNum}
-                    >
-                        {tab}
-                    </Tab>
-                </TabContainer>
-            ))
-        }
-    </TabGroup>
+    <>
+    {props.tabs && props.tabs.length > 0 &&
+        <TabGroup>  
+            {
+                props.tabs.map((tab,i) => (
+                    <TabContainer vertical={props.vertical}>
+                        <Tab 
+                            active={i === props.activeNum}
+                            onClick={props.onClick} 
+                        >
+                            {tab}
+                        </Tab>
+                    </TabContainer>
+                ))
+            }
+        </TabGroup>
+    }
+    </>
 );
 
 export default ToggleTab
