@@ -41,7 +41,6 @@ class Tags(Resource):
 
 # Class for updating, deleting & fetching tags
 class TagCRUD(Resource):
-
     # Update specific tag  
     @validate_tag_form
     @tag_exists
