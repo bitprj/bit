@@ -1,5 +1,6 @@
 from api.backend import db
 
+
 # A many to many relationship to keep track of tags and users
 user_tag_rel = db.Table("user_tag_rel",
                     db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
@@ -71,7 +72,7 @@ class Tag(db.Model):
     submission_guideline = db.Column(db.Text, nullable=False)
     about = db.Column(db.Text, nullable=False)
     emoji = db.Column(db.Text, nullable=False)
-    users = db.relationship("User", secondary="user_tag_rel",               
+    user = db.relationship("Users", secondary="user_tag_rel",               
                             back_populates="tags")
 
     def __repr__(self):
