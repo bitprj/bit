@@ -9,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
+
 app.config['GITHUB_CLIENT_ID'] = GITHUB_CLIENT_ID
 app.config['GITHUB_CLIENT_SECRET'] = GITHUB_CLIENT_SECRET
 app.config["PROPAGATE_EXCEPTIONS"] = True
@@ -28,9 +29,11 @@ from ..backend.authentication.routes import authentication_bp
 from ..backend.home.routes import home_bp
 from ..backend.meta.routes import meta_bp
 from ..backend.users.routes import user_bp
+from ..backend.tags.routes import tag_bp
 
 app.register_blueprint(articles_bp)
 app.register_blueprint(authentication_bp)
 app.register_blueprint(home_bp)
 app.register_blueprint(meta_bp)
 app.register_blueprint(user_bp)
+app.register_blueprint(tag_bp)
