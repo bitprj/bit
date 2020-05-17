@@ -1,4 +1,5 @@
 from api.backend import db
+import datetime
 
 
 # A many to many relationship to keep track of tags and users
@@ -7,6 +8,19 @@ user_tag_rel = db.Table("user_tag_rel",
                     db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True)
                 )
 
+
+class Article(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text, nullable=False)
+    cover_image = db.Column(db.Text, nullable=True)
+    content = db.Column(db.Text, nullable=False)
+    date_published = db.Column(db.DateTime, nullable=False, default=datetime.date.today)
+    likes = db.Column(db.Integer, nullable=False, default=0)
+    is_published = db.Column(db.Boolean, nullable=False, default=True)
+
+    def __repr__(self):
+        return f"Article('{self.id}')"
+      
 
 class Meta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,3 +92,4 @@ class Tag(db.Model):
 
     def __repr__(self):
         return f"Tag('{self.id} , {self.name}')"
+
