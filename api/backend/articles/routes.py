@@ -1,5 +1,4 @@
 from .. import api, db
-<<<<<<< HEAD
 from ..articles.decorators import article_exists, valid_article_form, article_table_empty
 from ..articles.utils import create_article, update_article
 from ..articles.schemas import article_schema, articles_schema 
