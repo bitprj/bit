@@ -10,8 +10,6 @@ import Button from '../shared/low/Button'
 import Icon from '../shared/low/Icon'
 import IconLine from '../shared/low/IconLine'
 
-import GitHubIcon from '@material-ui/icons/GitHub'
-
 const contentHeight = '2.2em'
 
 const Nav = styled.nav`
@@ -62,7 +60,7 @@ const NavBar = () => {
 
 				<AlignRight>
 					<NavButton invert onClick={login}>
-						<IconLine icon={<GitHubIcon />}>Login With GitHub</IconLine>
+						<IconLine>Login With GitHub</IconLine>
 					</NavButton>
 				</AlignRight>
 			</Nav>
