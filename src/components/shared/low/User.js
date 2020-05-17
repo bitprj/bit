@@ -30,20 +30,18 @@ const UserName = styled.h1`
 	margin-bottom: 0;
 `
 
-class User extends Component {
-    render() {
+const User = (props) => {
         return (
             <Container>
-                <Picture src = {this.props.ImgLink}/>
+                <Picture src = {props.ImgLink}/>
                 <div>
                     <UserName>
-                        {this.props.name}
+                        {props.name}
                     </UserName>
-                    {this.props.childComponent}
+                    {props.childComponent}
                 </div>
             </Container>
         )
-    }
-}
+};
 
 export default User

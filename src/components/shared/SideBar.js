@@ -12,14 +12,12 @@ const Container = styled.div`
 `;
 
 
-class SideBar extends Component {
-    render() {
+const SideBar = (props) =>{
         return (
             <Container>
-                {this.props.items.map((item, index) => <div key = {index}>{item}</div>)}
+                {props.items.map((item, index) => <div key = {index}>{item}</div>)}
             </Container>
         )
-    }
-}
+};
 
 export default SideBar
