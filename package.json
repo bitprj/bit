@@ -21,7 +21,8 @@
     "redux": "^4.0.5",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "twemoji": "^13.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
