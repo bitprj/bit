@@ -2,9 +2,9 @@ from .. import api, db
 from ..articles.decorators import article_exists, valid_article_form, article_table_empty
 from ..articles.utils import create_article, update_article
 from ..articles.schemas import article_schema, articles_schema 
+from ..models import Article
 from flask import Blueprint, request
 from flask_restful import Resource
-from ..models import Article
 
 # Blueprint for articles
 articles_bp = Blueprint("articles", __name__)
@@ -12,7 +12,6 @@ articles_bp = Blueprint("articles", __name__)
 
 # Class to handle information regarding the Article model
 class Articles(Resource):
-    
     # Function to create an article
     @valid_article_form
     def post(self):
@@ -28,6 +27,7 @@ class Articles(Resource):
     @article_table_empty
     def get(self):
         article = Article.query.limit(15)
+
         return articles_schema.dump(article, default=str)
 
 
