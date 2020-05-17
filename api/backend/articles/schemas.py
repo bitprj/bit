@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields
 import toastedmarshmallow
 
+
 # This schema is used to display article data
 class ArticleFormSchema(Schema):
     title = fields.Str(required=True)

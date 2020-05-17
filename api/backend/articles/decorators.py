@@ -1,7 +1,7 @@
 from ..articles.schemas import article_form_schema
-from functools import wraps
-from flask import request
 from ..models import Article
+from flask import request
+from functools import wraps
 
 
 # Decorator to check if the article exists
