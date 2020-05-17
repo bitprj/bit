@@ -31,7 +31,7 @@ def validate_tag_form(f):
         
         if errors:
             return {
-                "message": "Unable to create tag. Please enter all required form inputs."
+                "message": "Missing or sending incorrect data to create a classroom. Double check the JSON data that it has everything needed to create a Tag."
             }, 422
         else: 
             return f(*args, **kwargs)
