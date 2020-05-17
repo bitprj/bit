@@ -18,9 +18,9 @@ const ToggleTab = props => (
         <TabGroup>  
             {
                 props.tabs.map((tab,i) => (
-                    <TabContainer vertical={props.vertical}>
+                    <TabContainer vertical={props.vertical} key = {i}>
                         <Tab 
-                            active={i === props.activeNum}
+                            active ={i === props.activeNum}
                             onClick={props.onClick} 
                         >
                             {tab}

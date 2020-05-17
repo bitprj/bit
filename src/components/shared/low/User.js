@@ -38,7 +38,7 @@ const User = (props) => {
                     <UserName>
                         {props.name}
                     </UserName>
-                    {props.childComponent}
+                    {props.children}
                 </div>
             </Container>
         )
