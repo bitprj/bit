@@ -25,10 +25,10 @@ const backendResponseInterceptor = error => {
 }
 
 // export const baseUrl = 'https://wongband.pythonanywhere.com/'
-// export const baseUrl = 'https://bit-backend-staging.herokuapp.com/'
+export const baseUrl = 'https://bit-backend-staging.herokuapp.com/'
 // const baseUrl = 'https://darlene-backend.herokuapp.com/'
 // export const baseUrl = 'https://214509c7.ngrok.io'
-export const baseUrl = 'http://localhost:5000/api/'
+// export const baseUrl = 'http://localhost:5000/api/'
 
 export const backend = axios.create({
 	baseURL: baseUrl,
