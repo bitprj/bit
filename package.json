@@ -13,6 +13,8 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "camelcase-keys-deep": "^0.1.0",
+    "cloudinary-core": "^2.8.2",
+    "cloudinary-react": "^1.5.0",
     "emotion-theming": "^10.0.27",
     "react": "^16.13.1",
     "react-avatar": "^3.9.3",
@@ -23,6 +25,7 @@
     "redux": "^4.0.5",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.3.0",
+    "rich-markdown-editor": "^10.0.0-20",
     "styled-components": "^5.1.0"
   },
   "scripts": {
