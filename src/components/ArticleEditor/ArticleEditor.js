@@ -94,8 +94,4 @@ const ArticleEditor = ({
 		</div>
 		)
 }
-// const mapDispatchToProps = dispatch => ({
-// 	onSaveArticle: (article_id,content) =>
-// 		dispatch(saveArticle(article_id,content))
-// })
 export default ArticleEditor
