@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { debounce } from "lodash";
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import Editor from 'rich-markdown-editor';
-import {CloudinaryContext} from 'cloudinary-react';
 import { openUploadWidget } from "../../services/CloudinaryService";
+import {saveNewArticle,updateArticle} from "../../services/ArticleService";
 
 const ArticleEditor = ({
 	article_id,
@@ -12,7 +11,7 @@ const ArticleEditor = ({
 }) => {
 	const [readOnly,onChangeEdit] = useState(true)
 	
-	var [values,setValue] = useState(content)
+	var [values,setValue] = useState(content || "")
 
 	const [dark_theme,Change_theme] = useState(false)
 
@@ -48,7 +47,7 @@ const ArticleEditor = ({
 	const beginUpload = tag => {
 	  const uploadOptions = {
 	    cloudName: "rajshah",
-	    tags: [tag,'anImage'],
+	    tags: [tag],
 	    uploadPreset: "upload"
 	  };
 
@@ -65,6 +64,20 @@ const ArticleEditor = ({
 	  })
 	}
 
+// Save Article method 
+// May need some changes
+	const Save = () => {
+		console.log(values)
+		if(article_id==undefined){
+			const message = saveNewArticle(123,values)
+			console.log(message)
+		}
+		else{
+			const message = updateArticle(article_id,values)
+			console.log(message)
+		}
+	}
+
 	return(
 		<div style={{background:"white",width:'60%',marginLeft:'auto',marginRight:'auto'}}>
 		<div>
@@ -75,8 +88,9 @@ const ArticleEditor = ({
           <button type="button" onClick={ChangeTheme}>
           	Change Theme
           </button>
-          {readOnly?null:<button type="button" onClick={() => beginUpload('image')}>
+          {readOnly?null:<div><button type="button" onClick={() => beginUpload('image')}>
           	Upload Image</button>
+          	<button onClick={() => Save()}>Save</button></div>
           }
         </div>
         <br />
@@ -85,7 +99,7 @@ const ArticleEditor = ({
 			id="new_article"
 			readOnly={readOnly}
 			value={values}
-			defaultValue={content}
+			defaultValue={values}
 			onChange={handleChange}
 			onSave={options => console.log("Save triggered", options)}
 			dark={dark_theme}
