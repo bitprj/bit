@@ -1,5 +1,5 @@
-import { AUTHENTICATE, DEAUTHENTICATE, SET_USER_DATA } from '../actionTypes'
-import { fetchUserData } from '../../services/AccountService'
+import { AUTHENTICATE, DEAUTHENTICATE, SET_USER_DATA, LOGIN, LOGOUT} from '../actionTypes'
+import { fetchUserData, login } from '../../services/AccountService'
 
 export const initUserData = userId => async dispatch => {
 	const userData = await fetchUserData(userId)
@@ -10,6 +10,24 @@ export const initUserData = userId => async dispatch => {
 	dispatch({
 		type: SET_USER_DATA,
 		userData: { ...userData, name: validatedName }
+	})
+}
+
+export const userLogin = () => async (dispatch) => {
+	let userProfile =  await login()
+	userProfile = await userProfile.json()
+	userProfile = userProfile.profile
+	localStorage.setItem('profile', JSON.stringify(userProfile))
+	dispatch({
+		type: LOGIN,
+		userData: userProfile
+	})
+}
+
+export const userLogout = () => {
+	localStorage.removeItem('profile')
+	return({
+		type: LOGOUT
 	})
 }
 

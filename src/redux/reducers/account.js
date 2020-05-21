@@ -1,10 +1,11 @@
-import { AUTHENTICATE, DEAUTHENTICATE, SET_USER_DATA } from '../actionTypes'
+import { AUTHENTICATE, DEAUTHENTICATE, SET_USER_DATA, LOGIN, LOGOUT} from '../actionTypes'
 
 const storedMeta = localStorage.getItem('meta')
+const profileData = localStorage.getItem('profile')
 
 const initialState = {
 	meta: JSON.parse(storedMeta),
-	user: null
+	user: profileData ? JSON.parse(profileData) : null
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +24,13 @@ const reducer = (state = initialState, action) => {
 				...state,
 				user: action.userData
 			}
-
+		case LOGIN:
+			return {
+				...state,
+				user: action.userData
+			}
+		case LOGOUT:
+			return {}
 		default:
 			return state
 	}
