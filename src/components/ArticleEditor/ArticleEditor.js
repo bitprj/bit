@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { debounce } from "lodash";
-import { connect } from 'react-redux';
 import Editor from 'rich-markdown-editor';
 import { openUploadWidget } from "../../services/CloudinaryService";
 import {saveNewArticle,updateArticle} from "../../services/ArticleService";
@@ -10,8 +9,10 @@ const ArticleEditor = ({
 	content
 }) => {
 	const [readOnly,onChangeEdit] = useState(true)
-	
+
 	var [values,setValue] = useState(content || "")
+
+	var [value_dummy,setDummyValue] = useState(content || "")
 
 	const [dark_theme,Change_theme] = useState(false)
 
@@ -35,14 +36,14 @@ const ArticleEditor = ({
 		}
 		else{
 			changeEdit("Edit")
+			setValue(value_dummy)
 			onChangeEdit(true)
 		}
 	}
 
 	const handleChange = debounce(value => {
-	    setValue(value());
-	    console.log(values);
-	  }, 5000);
+	    setDummyValue(value());
+	  }, 250);
 
 	const beginUpload = tag => {
 	  const uploadOptions = {
@@ -54,33 +55,31 @@ const ArticleEditor = ({
 	  openUploadWidget(uploadOptions, (error, photos) => {
 	    if (!error) {
 	      if(photos.event === 'success'){
-	      	values+="![]("+photos.info.url+")"
-	      	setValue(values)
-	        setImages([...images, photos.info.url])
-		      }
+	      	value_dummy+="![]("+photos.info.url+")"
+	      	setValue(value_dummy)
+	        setImages([...images, photos.info.public_id])
+		    }
 	    } else {
 	      console.log(error);
 	    }
 	  })
 	}
 
-// Save Article method 
-// May need some changes
 	const Save = () => {
-		console.log(values)
-		if(article_id==undefined){
-			const message = saveNewArticle(123,values)
+		setValue(value_dummy)
+		if(article_id===undefined){
+			const message = saveNewArticle(values,images)
 			console.log(message)
 		}
 		else{
-			const message = updateArticle(article_id,values)
+			const message = updateArticle(article_id,values,images)
 			console.log(message)
 		}
 	}
 
 	return(
 		<div style={{background:"white",width:'60%',marginLeft:'auto',marginRight:'auto'}}>
-		<div>
+		<div style={{display:"flex"}}>
           <br />
           <button type="button" onClick={Change_ReadOnly}>
           	{edit}
@@ -88,23 +87,23 @@ const ArticleEditor = ({
           <button type="button" onClick={ChangeTheme}>
           	Change Theme
           </button>
-          {readOnly?null:<div><button type="button" onClick={() => beginUpload('image')}>
+          {readOnly?<div style={{display:"flex"}}><button type="button" disabled>Upload Image</button>
+          	<button disabled>Save</button></div>:<div style={{display:"flex"}}><button type="button" onClick={() => beginUpload('image')}>
           	Upload Image</button>
           	<button onClick={() => Save()}>Save</button></div>
           }
         </div>
         <br />
         <br />
-			<Editor
+		<Editor
 			id="new_article"
 			readOnly={readOnly}
 			value={values}
-			defaultValue={values}
+			defaultValue={content}
 			onChange={handleChange}
-			onSave={options => console.log("Save triggered", options)}
 			dark={dark_theme}
 			autoFocus
-			/>
+		/>
 		</div>
 		)
 }
