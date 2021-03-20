@@ -18,7 +18,7 @@ GitHub-Flask==3.2.0
 idna==2.9
 inflection==0.3.1
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 Mako==1.1.2
 MarkupSafe==1.1.1
 passlib==1.7.2
