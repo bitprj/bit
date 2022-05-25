@@ -25,7 +25,7 @@ passlib==1.7.2
 pendulum==2.1.0
 psycopg2==2.8.5
 py-buzz==1.0.3
-PyJWT==1.7.1
+PyJWT==2.4.0
 python-dateutil==2.8.1
 python-dotenv==0.13.0
 python-editor==1.0.4
