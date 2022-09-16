@@ -19,7 +19,7 @@ idna==2.9
 inflection==0.3.1
 itsdangerous==1.1.0
 Jinja2==2.11.2
-Mako==1.1.2
+Mako==1.2.2
 MarkupSafe==1.1.1
 passlib==1.7.2
 pendulum==2.1.0
